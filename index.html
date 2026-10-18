@@ -1,7 +1,183 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0b1722"><meta name="description" content="ValeriBasquet: baloncesto 3D en Compostela. Juega con Valeria en el Rosalía de Castro."><title>ValeriBasquet · O teu partido</title><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23ffd264'/%3E%3Ctext y='47' x='8' font-size='43' font-family='Arial' font-weight='bold'%3EV%3C/text%3E%3C/svg%3E"><link rel="stylesheet" href="css/game.css"></head><body>
-<div id="scene" aria-label="Pabellón de baloncesto en tres dimensiones"></div><div id="vignette"></div>
-<header><a href="./" class="brand"><span>V<span class="dot">●</span></span> VALERI<span>BASQUET</span></a><span class="place">SANTIAGO DE COMPOSTELA <i></i> BASKET FEMENINO · 5V5</span><div class="tools"><button id="camera" title="Cambiar cámara">Cámara ↻</button><button id="sound" aria-pressed="false">Sonido off</button><button id="help" aria-label="Cómo jugar">?</button></div></header>
-<main id="menu"><section class="menu-copy"><p class="eyebrow"><i></i> O TEU EQUIPO. O TEU PARTIDO.</p><h1>Aquí empieza<br><em>tu leyenda.</em></h1><p class="lead">Cinco jugadoras. Una ciudad.<br>Tu equipo empieza con Valeria.</p><div class="selector-head"><span>01 — ELIGE EQUIPO</span><small>5 CONTRA 5</small></div><div id="teams"></div><div id="roster" aria-label="Quinteto titular"></div><div class="match-settings"><label>RIVAL<select id="opponent"></select></label><label>DIFICULTAD<select id="difficulty"><option value="easy">Cantera</option><option value="normal" selected>Derbi</option><option value="hard">Leyenda</option></select></label></div><div class="menu-actions"><button id="start" class="primary">Jugar partido <span>↗</span></button><button id="practice" class="secondary">Entrenar</button></div><p class="footnote">PARTIDOS DE 3 MIN · TECLADO Y TÁCTIL</p></section><section class="hero-caption"><span class="live"><i></i> PABELLÓN COMPOSTELA</span><div><small id="hero-team">ROSALÍA DE CASTRO · #7</small><h2 id="hero-player">Valeria.</h2><p>Talento de aquí. Ganas de jugar.</p></div><div class="chips"><span>3D EN TIEMPO REAL</span><span>SIN DESCARGAS</span></div></section><footer>Juego independiente de aficionados. Plantillas y equipaciones ficticias, sin afiliación oficial. <button id="sources">Clubes y créditos ↗</button></footer></main>
-<div id="hud" hidden><div class="scoreboard"><div class="team-score home"><span id="homeLabel">ROSALÍA</span><strong id="homeScore">0</strong></div><div class="time"><span id="timer">3:00</span><small id="period">5 CONTRA 5</small></div><div class="team-score away"><strong id="awayScore">0</strong><span id="awayLabel">OBRADOIRO</span></div></div><div class="hud-top"><span id="possession">TU BALÓN</span><span class="shotclock">POSESIÓN <b id="shotClock">24</b></span><button id="pause">Ⅱ Pausa</button></div><div id="announcement" role="status">¡Vamos, Valeria!</div><div class="player-card"><span class="jersey">7</span><div><small>CONTROLAS A</small><strong id="playerName">VALERIA</strong></div><div class="stamina"><i id="staminaFill"></i></div></div><div id="shotUI" hidden><small>SUELTA EN VERDE</small><div class="shot-track"><i class="sweet"></i><b id="chargeFill"></b></div><span id="shotHint">TIRO A CANASTA</span></div><div class="desktop-controls"><span><b>WASD / ↑↓←→</b> Mover</span><span><b>ESPACIO</b> Mantener y soltar tiro</span><span><b>E</b> Pasar / cambiar</span><span><b>F</b> Robar</span><span><b>SHIFT</b> Correr</span></div><div id="touchControls"><div id="joystick" aria-label="Joystick de movimiento"><i id="stick"></i></div><div class="touch-actions"><button id="touchPass">PASE<br><small>CAMBIAR</small></button><button id="touchSteal">ROBO<br><small>SPRINT</small></button><button id="touchShoot">TIRAR<br><small>MANTÉN</small></button></div></div></div>
-<div id="panel" hidden><div class="panel-card"><span class="eyebrow" id="panelKicker">TIEMPO MUERTO</span><h2 id="panelTitle">Toma aire.</h2><p id="panelText">El partido te espera.</p><div id="stats"></div><button id="resume" class="primary">Volver a la pista ↗</button><button id="restart" class="secondary">Revancha</button><button id="back" class="text-button">Selección de equipos</button></div></div>
-<dialog id="info"><button id="closeInfo" class="close">Cerrar ✕</button><div id="infoBody"></div></dialog><div id="loading"><span class="loading-ball">◉</span><h2>Abriendo el pabellón…</h2><p id="loadText">Preparando la pista 3D</p></div><script type="module" src="js/main.js"></script></body></html>
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#0b1722" />
+    <meta
+      name="description"
+      content="ValeriBasquet: baloncesto 3D en Compostela. Juega con Valeria en el Rosalía de Castro."
+    />
+    <title>ValeriBasquet · O teu partido</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23ffd264'/%3E%3Ctext y='47' x='8' font-size='43' font-family='Arial' font-weight='bold'%3EV%3C/text%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="css/game.css?v=0.3.0" />
+  </head>
+  <body>
+    <div
+      id="scene"
+      aria-label="Pabellón de baloncesto en tres dimensiones"
+    ></div>
+    <div id="vignette"></div>
+    <header>
+      <a href="./" class="brand"
+        ><span>V<span class="dot">●</span></span> VALERI<span>BASQUET</span></a
+      ><span class="place"
+        >SANTIAGO DE COMPOSTELA <i></i> BASKET FEMENINO · 5V5</span
+      >
+      <div class="tools">
+        <button id="camera" title="Cambiar cámara">Cámara: TV ↻</button
+        ><button id="sound" aria-pressed="false">Sonido off</button
+        ><button id="help" aria-label="Cómo jugar">?</button>
+      </div>
+    </header>
+    <main id="menu">
+      <section class="menu-copy">
+        <p class="eyebrow"><i></i> COMPOSTELA COURTS / TEMPORADA 03</p>
+        <h1>Haz que<br /><em>la pista arda.</em></h1>
+        <p class="lead">
+          Valeria y su quinteto. Tú al mando.<br />Roba, corre, asiste. Y
+          termina arriba.
+        </p>
+        <div class="selector-head">
+          <span>01 — ELIGE EQUIPO</span><small>5 CONTRA 5</small>
+        </div>
+        <div id="teams"></div>
+        <div id="roster" aria-label="Quinteto titular"></div>
+        <div class="match-settings">
+          <label>RIVAL<select id="opponent"></select></label
+          ><label
+            >DIFICULTAD<select id="difficulty">
+              <option value="easy">Cantera</option>
+              <option value="normal" selected>Derbi</option>
+              <option value="hard">Leyenda</option>
+            </select></label
+          >
+        </div>
+        <div class="mode-picker" role="group" aria-label="Modo de juego">
+          <button data-mode="match" class="selected" aria-pressed="true">
+            PARTIDO<small>3 minutos</small></button
+          ><button data-mode="twentyone" aria-pressed="false">
+            A 21<small>Gana por dos</small></button
+          ><button data-mode="comeback" aria-pressed="false">
+            REMONTADA<small>90 s / 8-14</small>
+          </button>
+        </div>
+        <div class="menu-actions">
+          <button id="start" class="primary">
+            Jugar partido <span>↗</span></button
+          ><button id="practice" class="secondary">Entrenar</button>
+        </div>
+        <p class="footnote">5V5 / REBOTES / MATES / CONTRAATAQUES</p>
+      </section>
+      <section class="hero-caption">
+        <span class="live"><i></i> PABELLÓN COMPOSTELA</span>
+        <div>
+          <small id="hero-team">ROSALÍA DE CASTRO · #7</small>
+          <h2 id="hero-player">Valeria.</h2>
+          <p>El siguiente highlight lleva tu nombre.</p>
+        </div>
+        <div class="chips">
+          <span>3D EN TIEMPO REAL</span><span>SIN DESCARGAS</span>
+        </div>
+      </section>
+      <footer>
+        Juego independiente de aficionados. Plantillas y equipaciones ficticias,
+        sin afiliación oficial.
+        <button id="sources">Clubes y créditos ↗</button>
+      </footer>
+    </main>
+    <div id="hud" hidden>
+      <div class="scoreboard">
+        <div class="team-score home">
+          <span id="homeLabel">ROSALÍA</span><strong id="homeScore">0</strong>
+        </div>
+        <div class="time">
+          <span id="timer">3:00</span><small id="period">5 CONTRA 5</small>
+        </div>
+        <div class="team-score away">
+          <strong id="awayScore">0</strong><span id="awayLabel">OBRADOIRO</span>
+        </div>
+      </div>
+      <div class="hud-top">
+        <span id="possession">TU BALÓN</span
+        ><span class="shotclock">POSESIÓN <b id="shotClock">24</b></span
+        ><button id="pause">Ⅱ Pausa</button>
+      </div>
+      <div id="playFeedback"></div>
+      <div id="heatCard">
+        <span id="heatLabel">RITMO DEL EQUIPO</span>
+        <div><i id="heatFill"></i></div>
+        <small id="objective">Gana el derbi</small>
+      </div>
+      <canvas
+        id="radar"
+        width="120"
+        height="180"
+        aria-label="Posiciones de las jugadoras y el balón"
+      ></canvas>
+      <div id="announcement" role="status">¡Vamos, Valeria!</div>
+      <div class="player-card">
+        <span class="jersey">7</span>
+        <div>
+          <small>CONTROLAS A</small><strong id="playerName">VALERIA</strong>
+        </div>
+        <div class="stamina"><i id="staminaFill"></i></div>
+      </div>
+      <div id="shotUI" hidden>
+        <small>SUELTA EN VERDE</small>
+        <div class="shot-track">
+          <i class="sweet"></i><b id="chargeFill"></b>
+        </div>
+        <span id="shotHint">TIRO A CANASTA</span>
+      </div>
+      <div class="desktop-controls">
+        <span><b>WASD / ↑↓←→</b> Mover</span
+        ><span><b>ESPACIO</b> Tocar: tiro / Mantener: precisión</span
+        ><span><b>E</b> Pasar / cambiar</span
+        ><span><b>F</b> Robo / tapón / rebote</span
+        ><span><b>C</b> Cambio de mano</span><span><b>SHIFT</b> Correr</span>
+      </div>
+      <div id="touchControls">
+        <div id="joystick" aria-label="Joystick de movimiento">
+          <i id="stick"></i>
+        </div>
+        <div class="touch-actions">
+          <button id="touchCross">FINTA<small>CAMBIO</small></button
+          ><button id="touchPass">PASE<br /><small>CAMBIAR</small></button
+          ><button id="touchSteal">
+            <b id="defendLabel">ROBO</b><small>MANTÉN: CORRE</small></button
+          ><button id="touchShoot">
+            <b id="shootLabel">TIRAR</b><small>TOCA O MANTÉN</small>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div id="panel" hidden>
+      <div class="panel-card">
+        <span class="eyebrow" id="panelKicker">TIEMPO MUERTO</span>
+        <h2 id="panelTitle">Toma aire.</h2>
+        <p id="panelText">El partido te espera.</p>
+        <div id="stats"></div>
+        <button id="resume" class="primary">Volver a la pista ↗</button
+        ><button id="restart" class="secondary">Revancha</button
+        ><button id="back" class="text-button">Selección de equipos</button>
+      </div>
+    </div>
+    <dialog id="info">
+      <button id="closeInfo" class="close">Cerrar ✕</button>
+      <div id="infoBody"></div>
+    </dialog>
+    <div id="loading">
+      <span class="loading-ball">◉</span>
+      <h2>Abriendo el pabellón…</h2>
+      <p id="loadText">Preparando la pista 3D</p>
+    </div>
+    <script type="module" src="js/main.js?v=0.3.0"></script>
+  </body>
+</html>

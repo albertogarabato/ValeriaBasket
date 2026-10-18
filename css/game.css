@@ -1,3 +1,1358 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:wght@400;500;600;700;800&display=swap');
-:root{--bg:#0b1722;--text:#f5f0e6;--muted:#a6b2be;--gold:#ffd264;--blue:#377cbd}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px 'DM Sans',system-ui,sans-serif;overflow:hidden}button,select{font:inherit}button{cursor:pointer}button:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:3px}button{color:inherit}#scene,#vignette{position:fixed;inset:0}#scene canvas{display:block;width:100%;height:100%}#vignette{pointer-events:none;background:linear-gradient(90deg,#0b1722f0 0%,#0b1722ba 30%,transparent 68%),linear-gradient(0deg,#0b1722dd 0%,transparent 30%)}body.playing #vignette{background:linear-gradient(0deg,#0b1722b0,transparent 20%,transparent 80%,#0b172288)}header{height:82px;position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:0 3.5%;border-bottom:1px solid #ffffff12;gap:20px}.brand{font-size:18px;font-weight:800;letter-spacing:-.8px;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:4px}.brand>span:first-child{font-size:31px;font-style:italic;position:relative;margin-right:12px;color:var(--gold)}.dot{font-size:9px;position:absolute;bottom:3px;right:-5px}.brand>span:last-child{font-weight:400}.place{font-size:8px;letter-spacing:2px;color:#bcc7ce;display:flex;align-items:center;gap:12px}.place i{height:3px;width:3px;background:var(--gold);border-radius:50%}.tools{display:flex;gap:10px;align-items:center}.tools button{background:#ffffff09;border:1px solid #ffffff19;border-radius:5px;font-size:10px;padding:9px 11px}#help{border-radius:50%;width:30px;height:30px;padding:0}#menu{position:relative;z-index:2;height:calc(100dvh - 82px);padding:3vh 5% 40px;display:flex;justify-content:space-between;overflow:auto;gap:20px}.menu-copy{width:370px;flex-shrink:0}.eyebrow{font-size:9px;letter-spacing:1.8px;font-weight:700;color:var(--gold);display:flex;align-items:center;gap:8px}.eyebrow i,.live i{height:5px;width:5px;background:var(--gold);border-radius:50%;box-shadow:0 0 12px #ffcd63}h1{font:800 clamp(52px,6vw,86px)/.92 'Barlow Condensed',Impact,sans-serif;letter-spacing:-1px;margin:25px 0 20px}h1 em{font-style:normal;color:var(--gold)}.lead{font-size:13px;color:#adbbc7;line-height:1.65;margin:0 0 28px}.selector-head{display:flex;justify-content:space-between;font-size:9px;letter-spacing:1px;margin:20px 0 11px}.selector-head small{color:#8b9eab;font-size:8px}#teams{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.team{background:#142635b0;border:1px solid #ffffff13;border-radius:6px;padding:10px 5px;display:flex;flex-direction:column;align-items:center;gap:6px;transition:.2s}.team:hover{background:#20394d}.team.active{border-color:var(--gold);background:#ffd26410}.badge{background:var(--color);height:26px;width:26px;border-radius:6px 6px 11px 11px;display:grid;place-items:center;font-size:9px;font-weight:bold;border:1px solid #ffffff30}.team strong{font-size:9px;font-weight:500}.team.active strong{color:var(--gold)}.match-settings{display:flex;gap:12px;margin:17px 0}.match-settings label{flex:1;font-size:8px;letter-spacing:1px;color:#8fa4b3}.match-settings select{display:block;width:100%;background:#152736;color:var(--text);border:1px solid #ffffff20;padding:10px;border-radius:5px;font-size:11px;margin-top:7px}.menu-actions{display:flex;gap:10px}.primary{background:var(--gold);border:0;border-radius:6px;color:#202823;font-weight:800;padding:15px 20px;display:flex;justify-content:space-between;align-items:center;gap:30px;font-size:12px;flex:1}.primary:hover{background:#ffe39b}.secondary{background:#ffffff08;border:1px solid #ffffff28;border-radius:6px;padding:13px 18px;font-size:12px}.footnote{font-size:8px;letter-spacing:1.2px;color:#7c92a1;margin-top:15px}.hero-caption{display:flex;flex-direction:column;justify-content:space-between;text-align:right;padding:4vh 1% 3vh;align-items:flex-end;flex:1;pointer-events:none}.live{font-size:8px;letter-spacing:1.4px;display:flex;align-items:center;gap:8px;border:1px solid #ffffff22;background:#0b172255;border-radius:30px;padding:10px 14px}.hero-caption>div:not(.chips){margin-top:auto;margin-bottom:4vh;text-shadow:0 2px 10px #0008}.hero-caption small{font-size:9px;letter-spacing:2px;color:var(--gold)}.hero-caption h2{font:800 clamp(48px,7vw,100px)/1 'Barlow Condensed',Impact,sans-serif;margin:8px 0;letter-spacing:-1px}.hero-caption p{font-size:11px;color:#bdcbd4}.chips{display:flex;gap:10px}.chips span{font-size:7px;letter-spacing:1.5px;border:1px solid #ffffff25;border-radius:4px;padding:8px}footer{position:absolute;bottom:14px;left:5%;right:5%;font-size:8px;color:#758d9e;display:flex;justify-content:space-between;gap:10px}footer button{background:none;border:0;font-size:8px;color:#b3c2c9}#hud{position:fixed;inset:82px 0 0;z-index:2;pointer-events:none}#hud button{pointer-events:auto}.scoreboard{display:flex;justify-content:center;align-items:stretch;position:absolute;top:15px;left:50%;transform:translateX(-50%);border:1px solid #ffffff20;border-radius:8px;overflow:hidden;background:#0b1722ec;box-shadow:0 10px 40px #0004}.team-score{display:flex;align-items:center;gap:22px;padding:10px 24px;min-width:190px}.team-score span{font-size:10px;letter-spacing:1px;font-weight:700}.team-score strong{font:700 37px 'Barlow Condensed',Impact,sans-serif}.home{border-left:4px solid #4087d7;justify-content:flex-end}.away{border-right:4px solid #b83255}.time{display:flex;flex-direction:column;align-items:center;justify-content:center;background:#ffffff06;padding:7px 23px;min-width:106px}.time>span{font:600 27px 'Barlow Condensed',Impact,sans-serif;letter-spacing:2px;font-variant-numeric:tabular-nums}.time small{font-size:7px;color:var(--gold);white-space:nowrap;letter-spacing:1px}.hud-top{position:absolute;top:100px;left:50%;transform:translateX(-50%);display:flex;gap:18px;align-items:center;font-size:9px;white-space:nowrap}.hud-top>span:first-child{color:var(--gold);letter-spacing:1px}.shotclock{color:#a7b5c1;font-size:8px}.shotclock b{color:white;font-size:12px;margin-left:5px}.hud-top button{border:1px solid #ffffff20;background:#10213199;border-radius:4px;font-size:9px;padding:6px 9px}#announcement{position:absolute;top:145px;left:50%;transform:translateX(-50%);font-weight:700;font-size:16px;text-shadow:0 2px 8px #000;background:#0b1722ab;padding:9px 20px;border-radius:30px;transition:opacity .4s;text-align:center;white-space:nowrap}.player-card{position:absolute;bottom:72px;left:4%;display:flex;align-items:center;gap:11px;background:#0b1722c9;border:1px solid #ffffff15;border-radius:7px;padding:10px 15px}.jersey{font:700 30px 'Barlow Condensed',sans-serif;color:var(--gold)}.player-card small{display:block;font-size:7px;letter-spacing:1.5px;color:#8fa7b8}.player-card strong{font-size:12px;display:block;margin-top:3px}.stamina{width:50px;height:4px;background:#ffffff20;margin-left:15px}.stamina i{display:block;height:100%;background:var(--gold);width:100%}.desktop-controls{position:absolute;bottom:20px;left:0;right:0;display:flex;justify-content:center;gap:26px;font-size:8px;color:#a0b0bb}.desktop-controls b{display:block;font-size:8px;color:#e5edf1;margin-bottom:4px}#shotUI{position:absolute;bottom:85px;left:50%;transform:translateX(-50%);text-align:center;width:220px;background:#0b1722d9;border:1px solid #ffffff20;border-radius:8px;padding:14px}#shotUI small{font-size:8px;letter-spacing:2px;color:var(--gold)}.shot-track{position:relative;height:11px;background:#ffffff20;border-radius:5px;margin:10px 0;overflow:hidden}.sweet{position:absolute;left:65%;width:17%;height:100%;background:#85df89}.shot-track b{position:absolute;left:0;top:0;width:0;height:100%;background:#ffd264;border-right:3px solid white}#shotHint{font-size:8px;color:#9db1c2}#touchControls{display:none}#panel{position:fixed;inset:0;background:#06101ab8;backdrop-filter:blur(9px);display:grid;place-items:center;z-index:5}.panel-card{width:min(90vw,400px);background:#102231;border:1px solid #ffffff20;border-radius:14px;padding:35px;text-align:center}.panel-card .eyebrow{justify-content:center}.panel-card h2{font:800 55px/1 'Barlow Condensed',Impact,sans-serif;margin:20px 0}.panel-card p{font-size:12px;line-height:1.8;color:#a5bac7}.panel-card .primary{width:100%;margin-top:20px;justify-content:center}.panel-card .secondary{width:100%;margin-top:10px}.text-button{font-size:10px;background:none;border:0;color:#90a7b7;margin:16px 0 0}#stats{display:flex;justify-content:center;gap:25px;font-size:11px;color:#a9bfcc}#stats b{display:block;font-size:24px;color:var(--gold)}dialog{background:#102231;color:var(--text);border:1px solid #ffffff20;border-radius:12px;padding:30px;width:min(90vw,500px);font-size:12px;line-height:1.8}dialog::backdrop{background:#07121bcc;backdrop-filter:blur(5px)}dialog h2{font:700 36px 'Barlow Condensed',sans-serif}dialog a{color:var(--gold)}.close{float:right;background:none;border:0;font-size:10px}#loading{position:fixed;inset:0;background:#0b1722;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:center}.loading-ball{font-size:70px;color:var(--gold);animation:pulse 1s infinite alternate}#loading h2{font:700 35px 'Barlow Condensed',sans-serif}#loading p{color:#8fa7ba;font-size:12px}[hidden]{display:none!important}@keyframes pulse{to{transform:translateY(-20px) rotate(45deg)}}@media(max-height:780px) and (min-width:701px){#menu{padding-top:12px}.menu-copy{width:330px}h1{font-size:62px;margin:15px 0}.lead{margin-bottom:12px}.selector-head{margin-top:12px}.team{padding:7px 4px}.match-settings{margin:12px 0}.hero-caption{padding-bottom:25px}}@media(max-width:850px){.place{display:none}.menu-copy{width:320px}.team-score{min-width:135px;padding:8px 14px;gap:14px}.hero-caption .chips{display:none}}@media(pointer:coarse),(max-width:700px){#touchControls{display:block;position:absolute;inset:0;pointer-events:none;user-select:none}#joystick{position:absolute;bottom:36px;left:28px;width:110px;height:110px;border:2px solid #ffffff35;border-radius:50%;background:#0b172259;pointer-events:auto;touch-action:none}#stick{position:absolute;left:31px;top:31px;width:44px;height:44px;background:#ffffff45;border:1px solid #ffffff70;border-radius:50%;pointer-events:none}.touch-actions{position:absolute;bottom:40px;right:22px;display:flex;gap:9px;align-items:center;pointer-events:auto;touch-action:none}.touch-actions button{width:58px;height:58px;border-radius:50%;border:1px solid #ffffff55;background:#132b3bd9;font-size:10px;font-weight:bold;touch-action:none}.touch-actions small{display:block;font-size:6px;margin-top:3px;letter-spacing:.5px}#touchShoot{width:77px;height:77px;background:var(--gold);color:#202925;border:2px solid #ffe7a8;font-size:14px}.desktop-controls{display:none}.player-card{bottom:170px;left:20px;padding:7px 10px}.stamina{width:35px;margin-left:0}#shotUI{bottom:165px;left:auto;right:20px;transform:none;width:160px}#announcement{font-size:12px;top:128px;padding:7px 13px}}@media(max-width:700px){header{height:62px;padding:0 5%;gap:8px}.brand{font-size:13px}.brand>span:first-child{font-size:25px;margin-right:8px}.tools{gap:5px}.tools button{font-size:8px;padding:7px}#help{width:24px;height:24px}.tools #sound{display:none}#menu{height:calc(100dvh - 62px);padding:28px 6% 60px;display:block;background:linear-gradient(90deg,#0b1722bd,#0b172244)}.menu-copy{width:100%;max-width:390px}h1{font-size:65px;max-width:300px}.lead{font-size:12px;margin-bottom:22px}.hero-caption{display:none}.team{padding:9px 5px;background:#122636e6}.team strong{font-size:9px}.selector-head{font-size:8px}footer{position:static;margin-top:28px;display:block;font-size:7px;line-height:1.8}footer button{display:block;margin-top:8px;padding:0;font-size:8px}#hud{top:62px}.scoreboard{top:12px;width:94%;max-width:490px}.team-score{flex:1;min-width:0;padding:8px;gap:9px}.team-score span{font-size:8px;letter-spacing:.3px}.team-score strong{font-size:30px}.time{min-width:80px;padding:5px 10px}.time>span{font-size:25px}.hud-top{top:85px;gap:13px;font-size:8px}#vignette{background:linear-gradient(90deg,#0b1722bb,transparent),linear-gradient(0deg,#0b1722,transparent)}.player-card strong{font-size:10px}.jersey{font-size:23px}}@media(max-width:390px){.touch-actions{right:10px;gap:5px}#joystick{left:15px;width:95px;height:95px}#stick{left:24px;top:24px}.touch-actions button{width:48px;height:48px}#touchShoot{width:68px;height:68px}}
-#roster{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin:12px 0;padding:9px 0;border-block:1px solid #ffffff12}#roster>span{font-size:9px;text-align:center;color:#dce7ed}#roster b{display:block;color:var(--gold);font-size:13px;margin-bottom:3px}#roster small{display:block;font-size:6px;letter-spacing:.4px;color:#819aab;margin-top:4px}@media(max-height:800px) and (min-width:701px){h1{font-size:54px;margin:13px 0}.lead{margin-bottom:9px}#roster{margin:8px 0;padding:7px 0}.team{padding:6px}.match-settings{margin:10px 0}.hero-caption h2{font-size:86px}}
+@import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=DM+Sans:wght@400;500;600;700;800&display=swap");
+:root {
+  --bg: #0b1722;
+  --text: #f5f0e6;
+  --muted: #a6b2be;
+  --gold: #ffd264;
+  --blue: #377cbd;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font:
+    14px "DM Sans",
+    system-ui,
+    sans-serif;
+  overflow: hidden;
+}
+button,
+select {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+}
+button:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+}
+button {
+  color: inherit;
+}
+#scene,
+#vignette {
+  position: fixed;
+  inset: 0;
+}
+#scene canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+#vignette {
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, #0b1722f0 0%, #0b1722ba 30%, transparent 68%),
+    linear-gradient(0deg, #0b1722dd 0%, transparent 30%);
+}
+body.playing #vignette {
+  background: linear-gradient(
+    0deg,
+    #0b1722b0,
+    transparent 20%,
+    transparent 80%,
+    #0b172288
+  );
+}
+header {
+  height: 82px;
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3.5%;
+  border-bottom: 1px solid #ffffff12;
+  gap: 20px;
+}
+.brand {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.8px;
+  color: var(--text);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.brand > span:first-child {
+  font-size: 31px;
+  font-style: italic;
+  position: relative;
+  margin-right: 12px;
+  color: var(--gold);
+}
+.dot {
+  font-size: 9px;
+  position: absolute;
+  bottom: 3px;
+  right: -5px;
+}
+.brand > span:last-child {
+  font-weight: 400;
+}
+.place {
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: #bcc7ce;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.place i {
+  height: 3px;
+  width: 3px;
+  background: var(--gold);
+  border-radius: 50%;
+}
+.tools {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.tools button {
+  background: #ffffff09;
+  border: 1px solid #ffffff19;
+  border-radius: 5px;
+  font-size: 10px;
+  padding: 9px 11px;
+}
+#help {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+}
+#menu {
+  position: relative;
+  z-index: 2;
+  height: calc(100dvh - 82px);
+  padding: 3vh 5% 40px;
+  display: flex;
+  justify-content: space-between;
+  overflow: auto;
+  gap: 20px;
+}
+.menu-copy {
+  width: 370px;
+  flex-shrink: 0;
+}
+.eyebrow {
+  font-size: 9px;
+  letter-spacing: 1.8px;
+  font-weight: 700;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.eyebrow i,
+.live i {
+  height: 5px;
+  width: 5px;
+  background: var(--gold);
+  border-radius: 50%;
+  box-shadow: 0 0 12px #ffcd63;
+}
+h1 {
+  font:
+    800 clamp(52px, 6vw, 86px) / 0.92 "Barlow Condensed",
+    Impact,
+    sans-serif;
+  letter-spacing: -1px;
+  margin: 25px 0 20px;
+}
+h1 em {
+  font-style: normal;
+  color: var(--gold);
+}
+.lead {
+  font-size: 13px;
+  color: #adbbc7;
+  line-height: 1.65;
+  margin: 0 0 28px;
+}
+.selector-head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 9px;
+  letter-spacing: 1px;
+  margin: 20px 0 11px;
+}
+.selector-head small {
+  color: #8b9eab;
+  font-size: 8px;
+}
+#teams {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 7px;
+}
+.team {
+  background: #142635b0;
+  border: 1px solid #ffffff13;
+  border-radius: 6px;
+  padding: 10px 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  transition: 0.2s;
+}
+.team:hover {
+  background: #20394d;
+}
+.team.active {
+  border-color: var(--gold);
+  background: #ffd26410;
+}
+.badge {
+  background: var(--color);
+  height: 26px;
+  width: 26px;
+  border-radius: 6px 6px 11px 11px;
+  display: grid;
+  place-items: center;
+  font-size: 9px;
+  font-weight: bold;
+  border: 1px solid #ffffff30;
+}
+.team strong {
+  font-size: 9px;
+  font-weight: 500;
+}
+.team.active strong {
+  color: var(--gold);
+}
+.match-settings {
+  display: flex;
+  gap: 12px;
+  margin: 17px 0;
+}
+.match-settings label {
+  flex: 1;
+  font-size: 8px;
+  letter-spacing: 1px;
+  color: #8fa4b3;
+}
+.match-settings select {
+  display: block;
+  width: 100%;
+  background: #152736;
+  color: var(--text);
+  border: 1px solid #ffffff20;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 11px;
+  margin-top: 7px;
+}
+.menu-actions {
+  display: flex;
+  gap: 10px;
+}
+.primary {
+  background: var(--gold);
+  border: 0;
+  border-radius: 6px;
+  color: #202823;
+  font-weight: 800;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  font-size: 12px;
+  flex: 1;
+}
+.primary:hover {
+  background: #ffe39b;
+}
+.secondary {
+  background: #ffffff08;
+  border: 1px solid #ffffff28;
+  border-radius: 6px;
+  padding: 13px 18px;
+  font-size: 12px;
+}
+.footnote {
+  font-size: 8px;
+  letter-spacing: 1.2px;
+  color: #7c92a1;
+  margin-top: 15px;
+}
+.hero-caption {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: right;
+  padding: 4vh 1% 3vh;
+  align-items: flex-end;
+  flex: 1;
+  pointer-events: none;
+}
+.live {
+  font-size: 8px;
+  letter-spacing: 1.4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #ffffff22;
+  background: #0b172255;
+  border-radius: 30px;
+  padding: 10px 14px;
+}
+.hero-caption > div:not(.chips) {
+  margin-top: auto;
+  margin-bottom: 4vh;
+  text-shadow: 0 2px 10px #0008;
+}
+.hero-caption small {
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--gold);
+}
+.hero-caption h2 {
+  font:
+    800 clamp(48px, 7vw, 100px) / 1 "Barlow Condensed",
+    Impact,
+    sans-serif;
+  margin: 8px 0;
+  letter-spacing: -1px;
+}
+.hero-caption p {
+  font-size: 11px;
+  color: #bdcbd4;
+}
+.chips {
+  display: flex;
+  gap: 10px;
+}
+.chips span {
+  font-size: 7px;
+  letter-spacing: 1.5px;
+  border: 1px solid #ffffff25;
+  border-radius: 4px;
+  padding: 8px;
+}
+footer {
+  position: absolute;
+  bottom: 14px;
+  left: 5%;
+  right: 5%;
+  font-size: 8px;
+  color: #758d9e;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+footer button {
+  background: none;
+  border: 0;
+  font-size: 8px;
+  color: #b3c2c9;
+}
+#hud {
+  position: fixed;
+  inset: 82px 0 0;
+  z-index: 2;
+  pointer-events: none;
+}
+#hud button {
+  pointer-events: auto;
+}
+.scoreboard {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 1px solid #ffffff20;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #0b1722ec;
+  box-shadow: 0 10px 40px #0004;
+}
+.team-score {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 10px 24px;
+  min-width: 190px;
+}
+.team-score span {
+  font-size: 10px;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+.team-score strong {
+  font:
+    700 37px "Barlow Condensed",
+    Impact,
+    sans-serif;
+}
+.home {
+  border-left: 4px solid #4087d7;
+  justify-content: flex-end;
+}
+.away {
+  border-right: 4px solid #b83255;
+}
+.time {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff06;
+  padding: 7px 23px;
+  min-width: 106px;
+}
+.time > span {
+  font:
+    600 27px "Barlow Condensed",
+    Impact,
+    sans-serif;
+  letter-spacing: 2px;
+  font-variant-numeric: tabular-nums;
+}
+.time small {
+  font-size: 7px;
+  color: var(--gold);
+  white-space: nowrap;
+  letter-spacing: 1px;
+}
+.hud-top {
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  font-size: 9px;
+  white-space: nowrap;
+}
+.hud-top > span:first-child {
+  color: var(--gold);
+  letter-spacing: 1px;
+}
+.shotclock {
+  color: #a7b5c1;
+  font-size: 8px;
+}
+.shotclock b {
+  color: white;
+  font-size: 12px;
+  margin-left: 5px;
+}
+.hud-top button {
+  border: 1px solid #ffffff20;
+  background: #10213199;
+  border-radius: 4px;
+  font-size: 9px;
+  padding: 6px 9px;
+}
+#announcement {
+  position: absolute;
+  top: 145px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 700;
+  font-size: 16px;
+  text-shadow: 0 2px 8px #000;
+  background: #0b1722ab;
+  padding: 9px 20px;
+  border-radius: 30px;
+  transition: opacity 0.4s;
+  text-align: center;
+  white-space: nowrap;
+}
+.player-card {
+  position: absolute;
+  bottom: 72px;
+  left: 4%;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  background: #0b1722c9;
+  border: 1px solid #ffffff15;
+  border-radius: 7px;
+  padding: 10px 15px;
+}
+.jersey {
+  font:
+    700 30px "Barlow Condensed",
+    sans-serif;
+  color: var(--gold);
+}
+.player-card small {
+  display: block;
+  font-size: 7px;
+  letter-spacing: 1.5px;
+  color: #8fa7b8;
+}
+.player-card strong {
+  font-size: 12px;
+  display: block;
+  margin-top: 3px;
+}
+.stamina {
+  width: 50px;
+  height: 4px;
+  background: #ffffff20;
+  margin-left: 15px;
+}
+.stamina i {
+  display: block;
+  height: 100%;
+  background: var(--gold);
+  width: 100%;
+}
+.desktop-controls {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 26px;
+  font-size: 8px;
+  color: #a0b0bb;
+}
+.desktop-controls b {
+  display: block;
+  font-size: 8px;
+  color: #e5edf1;
+  margin-bottom: 4px;
+}
+#shotUI {
+  position: absolute;
+  bottom: 85px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  width: 220px;
+  background: #0b1722d9;
+  border: 1px solid #ffffff20;
+  border-radius: 8px;
+  padding: 14px;
+}
+#shotUI small {
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: var(--gold);
+}
+.shot-track {
+  position: relative;
+  height: 11px;
+  background: #ffffff20;
+  border-radius: 5px;
+  margin: 10px 0;
+  overflow: hidden;
+}
+.sweet {
+  position: absolute;
+  left: 65%;
+  width: 17%;
+  height: 100%;
+  background: #85df89;
+}
+.shot-track b {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background: #ffd264;
+  border-right: 3px solid white;
+}
+#shotHint {
+  font-size: 8px;
+  color: #9db1c2;
+}
+#touchControls {
+  display: none;
+}
+#panel {
+  position: fixed;
+  inset: 0;
+  background: #06101ab8;
+  backdrop-filter: blur(9px);
+  display: grid;
+  place-items: center;
+  z-index: 5;
+}
+.panel-card {
+  width: min(90vw, 400px);
+  background: #102231;
+  border: 1px solid #ffffff20;
+  border-radius: 14px;
+  padding: 35px;
+  text-align: center;
+}
+.panel-card .eyebrow {
+  justify-content: center;
+}
+.panel-card h2 {
+  font:
+    800 55px/1 "Barlow Condensed",
+    Impact,
+    sans-serif;
+  margin: 20px 0;
+}
+.panel-card p {
+  font-size: 12px;
+  line-height: 1.8;
+  color: #a5bac7;
+}
+.panel-card .primary {
+  width: 100%;
+  margin-top: 20px;
+  justify-content: center;
+}
+.panel-card .secondary {
+  width: 100%;
+  margin-top: 10px;
+}
+.text-button {
+  font-size: 10px;
+  background: none;
+  border: 0;
+  color: #90a7b7;
+  margin: 16px 0 0;
+}
+#stats {
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  font-size: 11px;
+  color: #a9bfcc;
+}
+#stats b {
+  display: block;
+  font-size: 24px;
+  color: var(--gold);
+}
+dialog {
+  background: #102231;
+  color: var(--text);
+  border: 1px solid #ffffff20;
+  border-radius: 12px;
+  padding: 30px;
+  width: min(90vw, 500px);
+  font-size: 12px;
+  line-height: 1.8;
+}
+dialog::backdrop {
+  background: #07121bcc;
+  backdrop-filter: blur(5px);
+}
+dialog h2 {
+  font:
+    700 36px "Barlow Condensed",
+    sans-serif;
+}
+dialog a {
+  color: var(--gold);
+}
+.close {
+  float: right;
+  background: none;
+  border: 0;
+  font-size: 10px;
+}
+#loading {
+  position: fixed;
+  inset: 0;
+  background: #0b1722;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.loading-ball {
+  font-size: 70px;
+  color: var(--gold);
+  animation: pulse 1s infinite alternate;
+}
+#loading h2 {
+  font:
+    700 35px "Barlow Condensed",
+    sans-serif;
+}
+#loading p {
+  color: #8fa7ba;
+  font-size: 12px;
+}
+[hidden] {
+  display: none !important;
+}
+@keyframes pulse {
+  to {
+    transform: translateY(-20px) rotate(45deg);
+  }
+}
+@media (max-height: 780px) and (min-width: 701px) {
+  #menu {
+    padding-top: 12px;
+  }
+  .menu-copy {
+    width: 330px;
+  }
+  h1 {
+    font-size: 62px;
+    margin: 15px 0;
+  }
+  .lead {
+    margin-bottom: 12px;
+  }
+  .selector-head {
+    margin-top: 12px;
+  }
+  .team {
+    padding: 7px 4px;
+  }
+  .match-settings {
+    margin: 12px 0;
+  }
+  .hero-caption {
+    padding-bottom: 25px;
+  }
+}
+@media (max-width: 850px) {
+  .place {
+    display: none;
+  }
+  .menu-copy {
+    width: 320px;
+  }
+  .team-score {
+    min-width: 135px;
+    padding: 8px 14px;
+    gap: 14px;
+  }
+  .hero-caption .chips {
+    display: none;
+  }
+}
+@media (pointer: coarse), (max-width: 700px) {
+  #touchControls {
+    display: block;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+  #joystick {
+    position: absolute;
+    bottom: 36px;
+    left: 28px;
+    width: 110px;
+    height: 110px;
+    border: 2px solid #ffffff35;
+    border-radius: 50%;
+    background: #0b172259;
+    pointer-events: auto;
+    touch-action: none;
+  }
+  #stick {
+    position: absolute;
+    left: 31px;
+    top: 31px;
+    width: 44px;
+    height: 44px;
+    background: #ffffff45;
+    border: 1px solid #ffffff70;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .touch-actions {
+    position: absolute;
+    bottom: 40px;
+    right: 22px;
+    display: flex;
+    gap: 9px;
+    align-items: center;
+    pointer-events: auto;
+    touch-action: none;
+  }
+  .touch-actions button {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    border: 1px solid #ffffff55;
+    background: #132b3bd9;
+    font-size: 10px;
+    font-weight: bold;
+    touch-action: none;
+  }
+  .touch-actions small {
+    display: block;
+    font-size: 6px;
+    margin-top: 3px;
+    letter-spacing: 0.5px;
+  }
+  #touchShoot {
+    width: 77px;
+    height: 77px;
+    background: var(--gold);
+    color: #202925;
+    border: 2px solid #ffe7a8;
+    font-size: 14px;
+  }
+  .desktop-controls {
+    display: none;
+  }
+  .player-card {
+    bottom: 170px;
+    left: 20px;
+    padding: 7px 10px;
+  }
+  .stamina {
+    width: 35px;
+    margin-left: 0;
+  }
+  #shotUI {
+    bottom: 165px;
+    left: auto;
+    right: 20px;
+    transform: none;
+    width: 160px;
+  }
+  #announcement {
+    font-size: 12px;
+    top: 128px;
+    padding: 7px 13px;
+  }
+}
+@media (max-width: 700px) {
+  header {
+    height: 62px;
+    padding: 0 5%;
+    gap: 8px;
+  }
+  .brand {
+    font-size: 13px;
+  }
+  .brand > span:first-child {
+    font-size: 25px;
+    margin-right: 8px;
+  }
+  .tools {
+    gap: 5px;
+  }
+  .tools button {
+    font-size: 8px;
+    padding: 7px;
+  }
+  #help {
+    width: 24px;
+    height: 24px;
+  }
+  .tools #sound {
+    display: none;
+  }
+  #menu {
+    height: calc(100dvh - 62px);
+    padding: 28px 6% 60px;
+    display: block;
+    background: linear-gradient(90deg, #0b1722bd, #0b172244);
+  }
+  .menu-copy {
+    width: 100%;
+    max-width: 390px;
+  }
+  h1 {
+    font-size: 65px;
+    max-width: 300px;
+  }
+  .lead {
+    font-size: 12px;
+    margin-bottom: 22px;
+  }
+  .hero-caption {
+    display: none;
+  }
+  .team {
+    padding: 9px 5px;
+    background: #122636e6;
+  }
+  .team strong {
+    font-size: 9px;
+  }
+  .selector-head {
+    font-size: 8px;
+  }
+  footer {
+    position: static;
+    margin-top: 28px;
+    display: block;
+    font-size: 7px;
+    line-height: 1.8;
+  }
+  footer button {
+    display: block;
+    margin-top: 8px;
+    padding: 0;
+    font-size: 8px;
+  }
+  #hud {
+    top: 62px;
+  }
+  .scoreboard {
+    top: 12px;
+    width: 94%;
+    max-width: 490px;
+  }
+  .team-score {
+    flex: 1;
+    min-width: 0;
+    padding: 8px;
+    gap: 9px;
+  }
+  .team-score span {
+    font-size: 8px;
+    letter-spacing: 0.3px;
+  }
+  .team-score strong {
+    font-size: 30px;
+  }
+  .time {
+    min-width: 80px;
+    padding: 5px 10px;
+  }
+  .time > span {
+    font-size: 25px;
+  }
+  .hud-top {
+    top: 85px;
+    gap: 13px;
+    font-size: 8px;
+  }
+  #vignette {
+    background:
+      linear-gradient(90deg, #0b1722bb, transparent),
+      linear-gradient(0deg, #0b1722, transparent);
+  }
+  .player-card strong {
+    font-size: 10px;
+  }
+  .jersey {
+    font-size: 23px;
+  }
+}
+@media (max-width: 390px) {
+  .touch-actions {
+    right: 10px;
+    gap: 5px;
+  }
+  #joystick {
+    left: 15px;
+    width: 95px;
+    height: 95px;
+  }
+  #stick {
+    left: 24px;
+    top: 24px;
+  }
+  .touch-actions button {
+    width: 48px;
+    height: 48px;
+  }
+  #touchShoot {
+    width: 68px;
+    height: 68px;
+  }
+}
+#roster {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
+  margin: 12px 0;
+  padding: 9px 0;
+  border-block: 1px solid #ffffff12;
+}
+#roster > span {
+  font-size: 9px;
+  text-align: center;
+  color: #dce7ed;
+}
+#roster b {
+  display: block;
+  color: var(--gold);
+  font-size: 13px;
+  margin-bottom: 3px;
+}
+#roster small {
+  display: block;
+  font-size: 6px;
+  letter-spacing: 0.4px;
+  color: #819aab;
+  margin-top: 4px;
+}
+@media (max-height: 800px) and (min-width: 701px) {
+  h1 {
+    font-size: 54px;
+    margin: 13px 0;
+  }
+  .lead {
+    margin-bottom: 9px;
+  }
+  #roster {
+    margin: 8px 0;
+    padding: 7px 0;
+  }
+  .team {
+    padding: 6px;
+  }
+  .match-settings {
+    margin: 10px 0;
+  }
+  .hero-caption h2 {
+    font-size: 86px;
+  }
+}
+.mode-picker {
+  display: flex;
+  border: 1px solid #ffffff24;
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+.mode-picker button {
+  flex: 1;
+  background: #102332b8;
+  border: 0;
+  border-right: 1px solid #ffffff16;
+  padding: 10px 4px;
+  color: #9db2c0;
+  font-size: 8px;
+  letter-spacing: 0.7px;
+}
+.mode-picker button:last-child {
+  border: 0;
+}
+.mode-picker button.selected {
+  background: #ffd264;
+  color: #182b35;
+  font-weight: 800;
+}
+.mode-picker small {
+  display: block;
+  margin-top: 4px;
+  font-size: 7px;
+  letter-spacing: 0;
+  opacity: 0.7;
+}
+.scoreboard {
+  top: 10px;
+  box-shadow: 0 8px 28px #0006;
+}
+.team-score {
+  padding: 5px 18px;
+  min-width: 160px;
+}
+.team-score strong {
+  font-size: 32px;
+}
+.time > span {
+  font-size: 24px;
+}
+.hud-top {
+  top: 80px;
+}
+#announcement {
+  top: 115px;
+  font-size: 13px;
+  padding: 7px 15px;
+}
+#playFeedback {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font:
+    800 35px "Barlow Condensed",
+    Impact,
+    sans-serif;
+  color: #f7ead1;
+  text-shadow: 0 3px 10px #000;
+  transition: opacity 0.3s;
+  pointer-events: none;
+  white-space: nowrap;
+}
+#playFeedback.perfect {
+  color: #91f8ad;
+  text-shadow:
+    0 0 22px #39e98d66,
+    0 3px 8px #000;
+}
+#heatCard {
+  position: absolute;
+  bottom: 92px;
+  left: 4%;
+  width: 195px;
+  padding: 10px 12px;
+  background: #0b1927bd;
+  border: 1px solid #ffffff12;
+  border-radius: 6px;
+}
+#heatLabel {
+  font-size: 7px;
+  letter-spacing: 1.5px;
+  color: #aabfcd;
+}
+#heatCard > div {
+  height: 4px;
+  background: #ffffff19;
+  border-radius: 4px;
+  margin-top: 7px;
+  overflow: hidden;
+}
+#heatFill {
+  display: block;
+  background: linear-gradient(90deg, #ffc955, #ff7540);
+  width: 0;
+  height: 100%;
+  transition: width 0.3s;
+}
+#heatCard small {
+  display: block;
+  font-size: 7px;
+  letter-spacing: 0.8px;
+  margin-top: 8px;
+  color: #d5dfdf;
+}
+.onfire {
+  box-shadow: 0 0 18px #ff84282a;
+  border-color: #ff9d5055 !important;
+}
+.player-card {
+  bottom: 165px;
+}
+#radar {
+  position: absolute;
+  bottom: 85px;
+  right: 3%;
+  width: 78px;
+  height: 116px;
+  border: 1px solid #ffffff22;
+  border-radius: 5px;
+  opacity: 0.85;
+}
+.shot-track b {
+  opacity: 0.55;
+  background: #ffc34e;
+}
+.shot-track b::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  width: 3px;
+  height: 100%;
+  background: white;
+  opacity: 1;
+}
+.shot-track .sweet {
+  left: 66.5%;
+  width: 13%;
+  box-shadow: 0 0 15px #6bff8477;
+}
+#touchCross {
+  position: absolute;
+  right: 150px;
+  bottom: 75px;
+  width: 46px;
+  height: 46px;
+  background: #21394be8;
+  font-size: 8px;
+}
+.scored .home strong,
+.scored .away strong {
+  animation: scorepop 0.55s ease;
+}
+.panel-card {
+  width: min(92vw, 450px);
+}
+#stats {
+  gap: 17px;
+  font-size: 9px;
+}
+#stats b {
+  font-size: 21px;
+}
+@keyframes scorepop {
+  40% {
+    color: #ffe28f;
+    transform: scale(1.35);
+  }
+}
+@media (max-height: 850px) and (min-width: 701px) {
+  #menu {
+    padding-top: 15px;
+  }
+  h1 {
+    font-size: 55px;
+    margin: 14px 0;
+  }
+  .lead {
+    font-size: 12px;
+    margin-bottom: 12px;
+  }
+  .selector-head {
+    margin-top: 12px;
+  }
+  .team {
+    padding: 6px;
+  }
+  #roster {
+    margin: 8px 0;
+    padding: 6px 0;
+  }
+  .match-settings {
+    margin: 10px 0;
+  }
+  .mode-picker {
+    margin: 10px 0;
+  }
+  .mode-picker button {
+    padding: 8px 3px;
+  }
+  .footnote {
+    font-size: 7px;
+  }
+}
+@media (max-width: 700px) {
+  .scoreboard {
+    top: 9px;
+    width: 93%;
+  }
+  .team-score {
+    min-width: 0;
+    padding: 5px 8px;
+  }
+  .team-score strong {
+    font-size: 27px;
+  }
+  .time > span {
+    font-size: 22px;
+  }
+  .time {
+    min-width: 70px;
+  }
+  .hud-top {
+    top: 74px;
+    gap: 10px;
+  }
+  #announcement {
+    top: 110px;
+    font-size: 11px;
+    max-width: 94%;
+    white-space: normal;
+  }
+  #playFeedback {
+    font-size: 28px;
+    top: 37%;
+  }
+  #radar {
+    bottom: 165px;
+    right: 18px;
+    width: 52px;
+    height: 78px;
+    opacity: 0.65;
+  }
+  #heatCard {
+    bottom: 165px;
+    left: 20px;
+    width: 150px;
+    padding: 8px;
+  }
+  .player-card {
+    bottom: 230px;
+  }
+  #shotUI {
+    bottom: 254px;
+    right: 16px;
+    width: 140px;
+    padding: 10px;
+  }
+  #touchShoot b,
+  #touchSteal b {
+    font-size: inherit;
+  }
+  .touch-actions {
+    right: 16px;
+    gap: 8px;
+  }
+  #heatLabel {
+    font-size: 6px;
+  }
+  #heatCard small {
+    font-size: 6px;
+  }
+  .mode-picker button {
+    font-size: 9px;
+  }
+  .mode-picker small {
+    font-size: 8px;
+  }
+  .lead {
+    margin-bottom: 14px;
+  }
+  .team {
+    padding: 8px 4px;
+  }
+}
+@media (max-width: 390px) {
+  #touchCross {
+    right: 120px;
+    bottom: 68px;
+  }
+  .touch-actions {
+    right: 10px;
+    gap: 5px;
+  }
+  .team-score span {
+    font-size: 7px;
+  }
+  .hud-top {
+    font-size: 7px;
+  }
+}
+@media (max-width: 700px) {
+  .tools #sound {
+    display: inline-block;
+    width: 27px;
+    height: 27px;
+    padding: 0;
+    font-size: 0;
+  }
+  .tools #sound::after {
+    content: "\266a";
+    font-size: 16px;
+    color: #ffd264;
+  }
+  .tools #sound[aria-pressed="true"] {
+    background: #ffd26430;
+  }
+  header {
+    gap: 5px;
+  }
+  .tools {
+    gap: 4px;
+  }
+  .brand {
+    font-size: 12px;
+  }
+  .tools #camera {
+    font-size: 7px;
+    padding: 7px 5px;
+  }
+}

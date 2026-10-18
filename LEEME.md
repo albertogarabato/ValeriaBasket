@@ -1,44 +1,76 @@
-# ValeriBasquet · 0.2
+# ValeriBasquet · 0.3 — Compostela Courts
 
-Juego nuevo de baloncesto 3D para navegador y móvil, ambientado en un pabellón ficticio de Santiago de Compostela. Rosalía de Castro es el equipo inicial; Valeria lleva el dorsal 7. El repositorio se llama ValeriaBasket y la marca del juego es ValeriBasquet.
+Baloncesto femenino arcade, 5 contra 5, en un pabellón 3D de Santiago. Valeria #7 juega con Nerea, Carla, Uxía y Alba en el Rosalía de Castro. Equipaciones y plantillas ficticias. Repositorio: albertogarabato/ValeriaBasket.
 
-## Jugar
+## Abrir
 
-GitHub Pages: https://albertogarabato.github.io/ValeriaBasket/ (requiere habilitar Pages desde main / raíz).
+GitHub Pages: https://albertogarabato.github.io/ValeriaBasket/ (solo estará disponible si Pages está habilitado desde main / raíz).
 
-Para abrir en local, ejecuta `python3 -m http.server 8080` en esta carpeta y visita http://localhost:8080. Los módulos del navegador requieren HTTP: no abras index.html con doble clic. No necesita compilación ni instalación de paquetes. Motor Three.js 0.180.0 desde jsDelivr, licencia MIT; requiere conexión a Internet. Una copia de respaldo del motor se incluye en vendor en el ZIP descargable; las fuentes de Google son opcionales y tienen alternativa local. Requiere WebGL 2 y navegador moderno.
+En local: `python3 -m http.server 8080` y abrir http://localhost:8080. No necesita compilación. Requiere navegador moderno con WebGL 2 e Internet para Three.js 0.180.0 desde jsDelivr. Las fuentes de Google son opcionales. No abrir index.html con doble clic: los módulos necesitan HTTP.
 
-## Primera versión
+## Qué cambia en 0.3
 
-- Pista completa 5 contra 5, seis clubes, tres dificultades y entreno libre.
-- Jugadoras de geometría curva con extremidades animadas, sombra, nombre y dorsal.
-- Pabellón, gradas, público, parquet, aro, tablero transparente y red en 3D.
-- Movimiento, sprint con energía, pases, cambio de jugadora, robos, tiros de 2/3 puntos y barra de lanzamiento.
-- Partidos de tres minutos, reloj de posesión de 24 segundos, prórroga de 30 segundos, marcador y estadísticas finales.
-- Joystick táctil, botones simultáneos, dos cámaras, pausa al perder foco, sonido opcional y mejor puntuación local.
+- Cámara TV que sigue la acción, cámara de ataque y vista táctica. Teclado y joystick se orientan respecto a la cámara.
+- Posesiones continuas: las demás jugadoras conservan su posición tras canastas y robos. Saque de fondo y transición al otro aro, sin recolocar a todos los equipos tras cada tiro.
+- Balón vivo tras un fallo, gravedad y botes. Rebotes disputados, recuperación manual saltando y cambio de control a quien recoge. Rebote ofensivo: al menos 14 segundos; cambio de equipo: 24.
+- Entradas y mates asistidos: tiro normal a menos de 3,5 m; sprint + tiro a menos de 2,5 m y con energía para un mate.
+- Tiro de un toque asistido, o mantener y soltar en verde para un lanzamiento preciso. El acierto depende de timing, distancia, presión y ritmo; no es una simulación física exacta del aro.
+- Pases dirigidos con una dirección y E. Sin dirección, a la más cercana. Puedes preparar el tiro mientras llega el pase.
+- Robos, tapones de cerca, salto por el rebote y cambio de mano con energía y protección breve del balón.
+- IA con cortes sin balón, ayudas, pases a compañeras abiertas, ataque al aro y persecución del rebote.
+- Modelos con codos y rodillas articulados; animaciones de carrera, bote, pase, tiro, entrada, mate y defensa. Parquet con veta, estela de balón y celebración de canastas.
+- Sonidos procedurales de bote, aro, zapatillas y público, activables desde el botón de sonido. Sin muestras comerciales.
+- Minimapa, indicador de energía, ritmo del equipo, feedback de tiro y estadísticas de rebotes, asistencias, robos, tapones, mates y tiros perfectos.
 
-WASD o flechas: moverse. Espacio: mantener y soltar el tiro en verde. E: pase al compañera más cercano / cambiar defensora. F: intentar robo de cerca. Shift: correr. P o Escape: pausa. En móvil, joystick y botones; mantener ROBO también activa sprint. Se ataca siempre la canasta del fondo.
+## Modos
 
-Arcade a pista completa: tras cada lanzamiento resuelto cambia la posesión. No hay rebotes disputados, faltas, multijugadora, plantillas reales ni simulación completa de reglamento. El acierto tiene componente aleatorio y depende de timing, distancia y presión. Entrenamiento sin rivales ni reloj de partido.
+**Partido:** tres minutos, prórroga de treinta segundos si empatas.
+
+**A 21:** gana el primer equipo en alcanzar al menos 21 con dos puntos de ventaja. No hay reloj de partido; sí de posesión.
+
+**Remontada:** empiezas perdiendo 8–14 y tienes noventa segundos para ganar. Un empate lleva a prórroga.
+
+**Entrenamiento:** sin rivales ni reloj de partido. Reto de cinco canastas; al completarlo puedes seguir entrenando.
+
+## Controles
+
+| Acción | Teclado | Móvil |
+| --- | --- | --- |
+| Movimiento relativo a cámara | WASD o flechas | Joystick |
+| Sprint | Shift | Mantener ROBO |
+| Tiro rápido | Tocar Espacio | Tocar TIRAR |
+| Tiro preciso | Mantener y soltar Espacio | Mantener y soltar TIRAR |
+| Pase / cambiar defensora | E; dirección para apuntar pase | PASE + joystick |
+| Robo / tapón / salto al rebote | F | ROBO / TAPÓN / REBOTE |
+| Cambio de mano | C | FINTA |
+| Pausa | P / Escape | Pausa |
+
+Tu equipo ataca el aro del fondo desde la cámara de ataque; la rival ataca el contrario. La cámara TV muestra el partido de lado y sigue el balón. Cambia a táctica para ver toda la pista.
 
 ## Arquitectura
 
-`js/match.js`: reglas puras, posesión, reloj, IA, tiro, pase y robo. `js/scene.js`: geometría, iluminación, animación y cámaras. `js/input.js`: teclado y controles táctiles. `js/teams.js`: clubes, equipaciones ficticias y jugadoraas personalizables. `js/main.js`: interfaz y coordinación. `css/game.css`: interfaz responsive. No comparte datos ni Firebase con ARI CRAFT. Reutiliza el enfoque técnico de Three.js + módulos JS + GitHub Pages; no reutiliza su mundo voxel.
+- `js/match.js`: estado puro, reglas, IA, tiempos, estadísticas y acciones.
+- `js/scene.js`: Three.js, pabellón, modelos, animaciones, efectos y cámaras.
+- `js/input.js`: entradas de teclado, joystick y botones simultáneos.
+- `js/audio.js`: sonido generado con Web Audio.
+- `js/teams.js`: clubes, nombres, dorsales y roles de las plantillas ficticias.
+- `js/main.js`: menús, HUD, minimapa y coordinación.
+- `css/game.css`: diseño adaptable.
 
-Para añadir nombres, edita `players` en teams.js. Los cinco dorsales son 7, 12, 23, 9 y 15. Valeria es personalizada; no se atribuye pertenencia real al club. No se usan escudos oficiales ni licencias.
+No comparte partidas, cuentas ni Firebase con ARI CRAFT. Se mantiene el enfoque de módulos JavaScript + Three.js + GitHub Pages. Récord y victorias se guardan localmente en este navegador; no hay cuenta ni sincronización.
 
-## Fuentes
+## Validación y límites
 
-Rosalía / FEDESA: https://baloncesto-fedesa.blogspot.com/2019/03/rosalia-fedesa-y-ulla-oil-siguen-con-su.html
+`node --test tests/*.test.js`: 18 pruebas cubren posesiones continuas, rebotes ofensivos y defensivos, dirección de pases, tiro preparado durante el pase, entradas/mates, tapones, robos sin teletransporte, cambios de mano, asistencias, modos y una simulación completa.
 
-Clubes de Santiago: https://fegaba.com/es/censos-provisionales-fegaba-2026/
+Revisado en navegador: movimiento, pase, tiro, mate con canasta y progreso del reto; diseño a 390 px y controles táctiles con ratón. Sin errores del motor en las comprobaciones. No se ha probado en teléfono físico; su rendimiento depende del dispositivo.
 
-Las plantillas femeninas son ficticias y no afirman que todos los clubes tengan una sección femenina actual. Los nombres identifican clubes locales, no sus plantillas ni categorías actuales. Equipaciones, personajes e identidad visual ficticios. Todos tienen capacidades equivalentes.
+Arcade de primera versión, sin faltas, fueras de banda, cambios de quinteto, liga, multijugador ni reglamento completo. Los rebotes tienen gravedad simplificada; los tiros deciden el acierto según probabilidad. En entrenamiento, tras encestar se repone la posición inicial; en partido las otras jugadoras permanecen en su sitio y regresan corriendo.
 
-## Verificar
+## Fuentes y créditos
 
-`node --test tests/*.test.js` con Node moderno. Pruebas de movimiento, tiro, puntuación, pases, robos, posesión, pausa, prórroga y final. La revisión visual y de entrada se hace en navegador. Rendimiento en dispositivos móviles físicos pendiente.
+Clubes reales, plantillas femeninas ficticias: no se afirma que todos mantengan una sección femenina actual ni se representan sus plantillas o categorías reales. No hay escudos oficiales, licencias ni afiliación.
 
-## Novedades 0.2
-
-Baloncesto femenino: Valeria #7 con Nerea, Carla, Uxía y Alba en el Rosalía. Diez jugadoras en pista completa con dos canastas, roles de quinteto, IA de cinco posiciones, reloj de 24 segundos y modelos con rostro y pelo animado. Cada equipo ataca la canasta opuesta.
+- Rosalía / FEDESA: https://baloncesto-fedesa.blogspot.com/2019/03/rosalia-fedesa-y-ulla-oil-siguen-con-su.html
+- Censo de clubes de Santiago: https://fegaba.com/es/censos-provisionales-fegaba-2026/
+- Three.js: licencia MIT en `vendor/THREE-LICENSE.txt`. La copia descargable incluye también una copia de respaldo del motor; la versión alojada lo carga desde el CDN.
